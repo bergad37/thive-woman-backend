@@ -10,7 +10,7 @@ export class AuthService {
     const existingUser = await this.userRepository.findOneBy({ email: payload.email });
 
     if (existingUser) {
-      throw new AppError("Email already in use", 409);
+      throw new AppError("User with this email already exists", 409);
     }
 
     const hashedPassword = await bcrypt.hash(payload.password || "", 10);
